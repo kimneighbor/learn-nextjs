@@ -1,5 +1,6 @@
 import './globals.css'
 import type {Metadata} from 'next'
+import Link from "next/link";
 
 
 export const metadata: Metadata = {
@@ -15,15 +16,16 @@ export default function RootLayout({
     return (
         <html>
         <body>
-        <h1><a href="/">WEB</a></h1>
+        {/* a에서 Link로 변경시 로드가 미리되므로 SPA 구현할 수 있음*/}
+        <h1><Link href="/">WEB</Link></h1>
         <ol>
-            <li><a href="/read/1">html</a></li>
-            <li><a href="/read/2">css</a></li>
+            <li><Link href="/read/1">html</Link></li>
+            <li><Link href="/read/2">css</Link></li>
         </ol>
         {children}
         <ul>
-            <li><a href="/create">Create</a></li>
-            <li><a href="/update/1">Update</a></li>
+            <li><Link href="/create">Create</Link></li>
+            <li><Link href="/update/1">Update</Link></li>
             <li><input type="button" value="delete"/></li>
         </ul>
         </body>
