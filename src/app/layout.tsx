@@ -1,10 +1,10 @@
-"use client"; //client component 를 사용
+// "use client"; //client component 를 사용, 없으면 server component 사용
 
 
 import './globals.css'
 import type {Metadata} from 'next'
 import Link from "next/link";
-import {useEffect, useState} from "react";
+// import {useEffect, useState} from "react";
 
 // client component 로 변경했기 때문에 server component 는 사용 불가
 // export const metadata: Metadata = {
@@ -14,17 +14,22 @@ import {useEffect, useState} from "react";
 type Topic = {
     id: number;
     title: string;
+    body: string;
 }
-export default function RootLayout({children,}: { children: React.ReactNode }) {
-    const [topics, setTopics] = useState<Topic[]>([]);
+export default async function RootLayout({children,}: { children: React.ReactNode }) {
+    // const [topics, setTopics] = useState<Topic[]>([]);
+    //
+    // // useEffect 로 서버에서 클라이언트로 데이터를 가져오고있다.
+    // useEffect(() => {
+    //     fetch('http://localhost:9999/topics')
+    //         .then(resp => resp.json())
+    //         .then(result => {
+    //             setTopics(result);
+    //         })
+    // }, []);
 
-    useEffect(() => {
-        fetch('http://localhost:9999/topics')
-            .then(resp => resp.json())
-            .then(result => {
-                setTopics(result);
-            })
-    }, []);
+    const resp = await fetch('http://localhost:9999/topics');
+    const topics = await resp.json();
 
     return (
         <html>
@@ -32,7 +37,7 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
         {/* a에서 Link로 변경시 로드가 미리되므로 SPA 구현할 수 있음*/}
         <h1><Link href="/">WEB</Link></h1>
         <ol>
-            {topics.map((topic) => {
+            {topics.map((topic:Topic) => {
                 return <li key={topic.id}><Link href={`/read/${topic.id}`}>{topic.title}</Link>
                 </li>
             })}
