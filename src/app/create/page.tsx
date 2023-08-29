@@ -35,7 +35,7 @@ export default function Create() {
                 .then(result=>{
                     // 마지막(방금) 생성한 result 의 id 값을 받음
                     const lastid = result.id;
-                    // lastid 값을 redirection
+                    // lastid 값을 redirectiontes
                     router.push(`/read/${lastid}`);
                 })
         }}>
