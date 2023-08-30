@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 }
 
 
-
+// 타입 앨리어스
 type Topic = {
     id: number;
     title: string;
@@ -32,7 +32,7 @@ export default async function RootLayout({children,}: { children: React.ReactNod
     //         })
     // }, []);
 
-    const resp = await fetch('http://localhost:9999/topics',{cache: "no-store"});
+    const resp = await fetch(process.env.NEXT_PUBLIC_URL+'topics',{cache: "no-store"});
     const topics = await resp.json();
 
     return (

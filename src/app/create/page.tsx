@@ -30,7 +30,7 @@ export default function Create() {
                 // json 데이터 타입으로 전환
                 body: JSON.stringify({title, body})
             }
-            fetch('http://localhost:9999/topics' , options)
+            fetch(process.env.NEXT_PUBLIC_URL+ 'topics' , options)
                 .then(res=>res.json())
                 .then(result=>{
                     // 마지막(방금) 생성한 result 의 id 값을 받음
